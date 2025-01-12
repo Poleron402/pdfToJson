@@ -9,7 +9,7 @@ def test_to_json(pdf_path):
         for page in pdf.pages:
             text = page.extract_text()
             if text:
-                text = text.replace('\u25aa', '-')
+                text = text.replace('\u25aa', '-').replace('\u2019', '\'')
                 lines = text.split('\n')
                 for i in lines:
                     pdf_text.append(i)
@@ -27,7 +27,9 @@ def test_to_json(pdf_path):
         else:
             i+=1
     return questions
-print(test_to_json('C:\\coding\\scripts\\100q.pdf')) # replace with where your pdf is stored
-where_to_store = 'C:\\coding\\civics\\src\\questions.json' # replace with where you want the json to be stored/used
+
+where_to_store = '/mnt/c/coding/civics/src/data/questions.json'  # replace with where you want the json to be stored/used
+where_pdf = '/mnt/c/coding/scripts/100q.pdf'  # replace with where your pdf is stored
+
 with open(where_to_store, 'w') as js:
-    json.dump(test_to_json('C:\\coding\\scripts\\100q.pdf'), js)
+    json.dump(test_to_json(where_pdf), js, indent=4)
