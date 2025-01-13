@@ -20,6 +20,8 @@ def test_to_json(pdf_path):
             obj['question'] = pdf_text[i]
             i+=1
             obj['answers'] = []
+            while not pdf_text[i].startswith('- '):
+                i+=1
             while pdf_text[i].startswith('- '):
                 obj['answers'].append(pdf_text[i].replace('- ', ''))
                 i+=1
